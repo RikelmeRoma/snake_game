@@ -1,2 +1,2 @@
-baixe o dotnet 
-E use dotnet run para iniciar o jogo
+Baixe o dotnet.
+Use "dotnet run" para iniciar o jogo
