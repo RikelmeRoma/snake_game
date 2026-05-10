@@ -207,20 +207,23 @@ public class GameManager
     }
 
     private void DrawGame()
-    {
-        // SCORE
-        Raylib.DrawText(
-            $"Score: {score}",
-            10,
-            10,
-            30,
-            Color.White
-        );
+{
+    // GRID
+    DrawGrid();
 
-        snake.Draw();
+    // SCORE
+    Raylib.DrawText(
+        $"Score: {score}",
+        10,
+        10,
+        30,
+        Color.White
+    );
 
-        food.Draw();
-    }
+    snake.Draw();
+
+    food.Draw();
+}
 
     private void DrawGameOver()
     {
@@ -236,4 +239,33 @@ public class GameManager
             Color.White
         );
     }
+
+    private void DrawGrid()
+{
+    new Color(20, 20, 20, 255);
+
+    // LINHAS VERTICAIS
+    for (int x = 0; x < screenWidth; x += cellSize)
+    {
+        Raylib.DrawLine(
+            x,
+            0,
+            x,
+            screenHeight,
+            Color.DarkGray
+        );
+    }
+
+    // LINHAS HORIZONTAIS
+    for (int y = 0; y < screenHeight; y += cellSize)
+    {
+        Raylib.DrawLine(
+            0,
+            y,
+            screenWidth,
+            y,
+            Color.DarkGray
+        );
+    }
+}
 }
