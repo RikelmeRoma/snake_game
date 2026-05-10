@@ -11,7 +11,6 @@ public class GameManager
 
     private Snake snake;
     private Food food;
-
     private Random random = new();
 
     private GameState state = GameState.Start;
@@ -19,6 +18,7 @@ public class GameManager
     private float moveTimer = 0;
     private float moveDelay = 0.15f;
 
+    // PONTUAÇÃO
     private int score = 0;
 
     public GameManager()
@@ -90,21 +90,22 @@ public class GameManager
 
             snake.Move(grow);
 
+            // COME A COMIDA
             if (grow)
-{
-    score++;
+            {
+                score++;
 
-    // AUMENTA A VELOCIDADE
-    moveDelay -= 0.005f;
+                // AUMENTA VELOCIDADE
+                moveDelay -= 0.005f;
 
-    // LIMITE MÍNIMO DE VELOCIDADE
-    if (moveDelay < 0.05f)
-    {
-        moveDelay = 0.05f;
-    }
+                // LIMITE MÍNIMO
+                if (moveDelay < 0.05f)
+                {
+                    moveDelay = 0.05f;
+                }
 
-    food.Generate(random, screenWidth, screenHeight);
-}
+                food.Generate(random, screenWidth, screenHeight);
+            }
 
             CheckCollision();
         }
@@ -117,6 +118,12 @@ public class GameManager
             snake.Reset();
 
             food.Generate(random, screenWidth, screenHeight);
+
+            // RESETA SCORE
+            score = 0;
+
+            // RESETA VELOCIDADE
+            moveDelay = 0.15f;
 
             state = GameState.Playing;
         }
@@ -141,7 +148,7 @@ public class GameManager
     {
         Vector2 head = snake.Body[0];
 
-        // PAREDE
+        // COLISÃO COM PAREDE
         if (
             head.X < 0 ||
             head.Y < 0 ||
@@ -152,7 +159,7 @@ public class GameManager
             state = GameState.GameOver;
         }
 
-        // CORPO
+        // COLISÃO COM O CORPO
         for (int i = 1; i < snake.Body.Count; i++)
         {
             if (snake.Body[i] == head)
@@ -201,6 +208,15 @@ public class GameManager
 
     private void DrawGame()
     {
+        // SCORE
+        Raylib.DrawText(
+            $"Score: {score}",
+            10,
+            10,
+            30,
+            Color.White
+        );
+
         snake.Draw();
 
         food.Draw();

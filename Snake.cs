@@ -51,6 +51,7 @@ public class Snake
                 cellSize,
                 cellSize,
                 Color.Green
+                
             );
         }
     }
