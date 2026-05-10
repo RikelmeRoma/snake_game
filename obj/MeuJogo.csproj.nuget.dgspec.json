@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\MeuJogo\\MeuJogo.csproj": {}
+    "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\Meujogo\\MeuJogo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\MeuJogo\\MeuJogo.csproj": {
+    "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\Meujogo\\MeuJogo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\MeuJogo\\MeuJogo.csproj",
+        "projectUniqueName": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\Meujogo\\MeuJogo.csproj",
         "projectName": "MeuJogo",
-        "projectPath": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\MeuJogo\\MeuJogo.csproj",
+        "projectPath": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\Meujogo\\MeuJogo.csproj",
         "packagesPath": "C:\\Users\\rikelme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\MeuJogo\\obj\\",
+        "outputPath": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\Meujogo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rikelme\\AppData\\Roaming\\NuGet\\NuGet.Config"
