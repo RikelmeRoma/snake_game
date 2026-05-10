@@ -19,6 +19,8 @@ public class GameManager
     private float moveTimer = 0;
     private float moveDelay = 0.15f;
 
+    private int score = 0;
+
     public GameManager()
     {
         Raylib.InitWindow(screenWidth, screenHeight, "Snake");
@@ -89,9 +91,20 @@ public class GameManager
             snake.Move(grow);
 
             if (grow)
-            {
-                food.Generate(random, screenWidth, screenHeight);
-            }
+{
+    score++;
+
+    // AUMENTA A VELOCIDADE
+    moveDelay -= 0.005f;
+
+    // LIMITE MÍNIMO DE VELOCIDADE
+    if (moveDelay < 0.05f)
+    {
+        moveDelay = 0.05f;
+    }
+
+    food.Generate(random, screenWidth, screenHeight);
+}
 
             CheckCollision();
         }

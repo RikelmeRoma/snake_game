@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RalOZmhirVI=",
+  "dgSpecHash": "Zacw5Z7KQEA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\Meujogo\\MeuJogo.csproj",
+  "projectFilePath": "C:\\Users\\rikelme\\Desktop\\codigos\\Famp\\MeuJogo\\MeuJogo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rikelme\\.nuget\\packages\\raylib-cs\\7.0.2\\raylib-cs.7.0.2.nupkg.sha512"
   ],
