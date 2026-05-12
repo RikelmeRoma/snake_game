@@ -5,20 +5,24 @@ namespace MeuJogo.Game;
 
 public class GameManager
 {
+    // Configurações da janela e do grid
     private const int screenWidth = 800;
     private const int screenHeight = 600;
     private const int cellSize = 20;
 
+    // Objetos principais do jogo
     private Snake snake;
     private Food food;
     private Random random = new();
 
+    // Estado atual do jogo
     private GameState state = GameState.Start;
 
+    // Controle da velocidade da cobra
     private float moveTimer = 0;
     private float moveDelay = 0.15f;
 
-    // PONTUAÇÃO
+    // Pontuação
     private int score = 0;
 
     public GameManager()
@@ -34,6 +38,7 @@ public class GameManager
         food.Generate(random, screenWidth, screenHeight);
     }
 
+    // Loop principal do jogo
     public void Run()
     {
         while (!Raylib.WindowShouldClose())
@@ -46,6 +51,7 @@ public class GameManager
         Raylib.CloseWindow();
     }
 
+    // Atualiza lógica do jogo
     private void Update()
     {
         float delta = Raylib.GetFrameTime();
@@ -68,6 +74,7 @@ public class GameManager
         }
     }
 
+    // Tela inicial
     private void UpdateStart()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.Enter))
@@ -76,29 +83,31 @@ public class GameManager
         }
     }
 
+    // Atualiza gameplay
     private void UpdateGame()
     {
         HandleInput();
 
+        // Move a cobra baseado no tempo
         if (moveTimer >= moveDelay)
         {
             moveTimer = 0;
 
             Vector2 newHead = snake.Body[0] + snake.Direction;
 
+            // Verifica se comeu a comida
             bool grow = newHead == food.Position;
 
             snake.Move(grow);
 
-            // COME A COMIDA
             if (grow)
             {
                 score++;
 
-                // AUMENTA VELOCIDADE
+                // Aumenta velocidade
                 moveDelay -= 0.005f;
 
-                // LIMITE MÍNIMO
+                // Limite mínimo de velocidade
                 if (moveDelay < 0.05f)
                 {
                     moveDelay = 0.05f;
@@ -111,6 +120,7 @@ public class GameManager
         }
     }
 
+    // Tela de game over
     private void UpdateGameOver()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.Enter))
@@ -119,16 +129,15 @@ public class GameManager
 
             food.Generate(random, screenWidth, screenHeight);
 
-            // RESETA SCORE
+            // Reseta valores
             score = 0;
-
-            // RESETA VELOCIDADE
             moveDelay = 0.15f;
 
             state = GameState.Playing;
         }
     }
 
+    // Controle do teclado
     private void HandleInput()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.Right) && snake.Direction.X != -1)
@@ -144,11 +153,12 @@ public class GameManager
             snake.Direction = new Vector2(0, 1);
     }
 
+    // Verifica colisões
     private void CheckCollision()
     {
         Vector2 head = snake.Body[0];
 
-        // COLISÃO COM PAREDE
+        // Colisão com parede
         if (
             head.X < 0 ||
             head.Y < 0 ||
@@ -159,7 +169,7 @@ public class GameManager
             state = GameState.GameOver;
         }
 
-        // COLISÃO COM O CORPO
+        // Colisão com o próprio corpo
         for (int i = 1; i < snake.Body.Count; i++)
         {
             if (snake.Body[i] == head)
@@ -169,6 +179,7 @@ public class GameManager
         }
     }
 
+    // Renderização
     private void Draw()
     {
         Raylib.BeginDrawing();
@@ -193,6 +204,7 @@ public class GameManager
         Raylib.EndDrawing();
     }
 
+    // Desenha tela inicial
     private void DrawStart()
     {
         Raylib.DrawText("SNAKE GAME", 220, 200, 60, Color.Green);
@@ -206,25 +218,26 @@ public class GameManager
         );
     }
 
+    // Desenha gameplay
     private void DrawGame()
-{
-    // GRID
-    DrawGrid();
+    {
+        DrawGrid();
 
-    // SCORE
-    Raylib.DrawText(
-        $"Score: {score}",
-        10,
-        10,
-        30,
-        Color.White
-    );
+        // Score do jogador
+        Raylib.DrawText(
+            $"Score: {score}",
+            10,
+            10,
+            30,
+            Color.White
+        );
 
-    snake.Draw();
+        snake.Draw();
 
-    food.Draw();
-}
+        food.Draw();
+    }
 
+    // Tela de derrota
     private void DrawGameOver()
     {
         DrawGame();
@@ -240,32 +253,31 @@ public class GameManager
         );
     }
 
+    // Desenha a grade do mapa
     private void DrawGrid()
-{
-    new Color(20, 20, 20, 255);
-
-    // LINHAS VERTICAIS
-    for (int x = 0; x < screenWidth; x += cellSize)
     {
-        Raylib.DrawLine(
-            x,
-            0,
-            x,
-            screenHeight,
-            Color.DarkGray
-        );
-    }
+        // Linhas verticais
+        for (int x = 0; x < screenWidth; x += cellSize)
+        {
+            Raylib.DrawLine(
+                x,
+                0,
+                x,
+                screenHeight,
+                Color.DarkGray
+            );
+        }
 
-    // LINHAS HORIZONTAIS
-    for (int y = 0; y < screenHeight; y += cellSize)
-    {
-        Raylib.DrawLine(
-            0,
-            y,
-            screenWidth,
-            y,
-            Color.DarkGray
-        );
+        // Linhas horizontais
+        for (int y = 0; y < screenHeight; y += cellSize)
+        {
+            Raylib.DrawLine(
+                0,
+                y,
+                screenWidth,
+                y,
+                Color.DarkGray
+            );
+        }
     }
-}
 }

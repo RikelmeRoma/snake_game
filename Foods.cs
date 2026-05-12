@@ -5,8 +5,10 @@ namespace MeuJogo.Game;
 
 public class Food
 {
+    // Posição da comida no mapa
     public Vector2 Position;
 
+    // Tamanho de cada célula do jogo
     private int cellSize;
 
     public Food(int cellSize)
@@ -14,6 +16,7 @@ public class Food
         this.cellSize = cellSize;
     }
 
+    // Gera uma posição aleatória para a comida
     public void Generate(Random random, int width, int height)
     {
         Position = new Vector2(
@@ -22,6 +25,7 @@ public class Food
         );
     }
 
+    // Desenha a comida na tela
     public void Draw()
     {
         Raylib.DrawRectangle(
